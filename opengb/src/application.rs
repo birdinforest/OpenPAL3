@@ -15,7 +15,10 @@ pub struct OpenGbApplication {
 impl ApplicationExtension<OpenGbApplication> for OpenGbApplication {
     fn on_initialized(&mut self, app: &mut Application<OpenGbApplication>) {
         simple_logger::init().unwrap();
-        app.set_title(&self.app_name);
+
+        // // FIXME: Add implementation.
+        // app.set_title(&self.app_name);
+
         self.asset_mgr = Some(Rc::new(AssetManager::new(
             app.engine_mut().rendering_component_factory(),
             &self.root_path,
@@ -39,7 +42,7 @@ impl ApplicationExtension<OpenGbApplication> for OpenGbApplication {
 }
 
 impl OpenGbApplication {
-    pub fn create(config: &OpenGbConfig, app_name: &str) -> Application<OpenGbApplication> {
+    pub unsafe fn create(config: &OpenGbConfig, app_name: &str) -> Application<OpenGbApplication> {
         Application::new(Self::new(config, app_name))
     }
 
